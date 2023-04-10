@@ -1,23 +1,19 @@
 {
     "manifest_version": 2,
-    "name": "YouTube GeoRestrictions",
+    "name": "YouTube Georestriction Logger",
     "version": "1.0",
-    "description": "Shows a list of countries the video is available in.",
-    "icons": {
-        "48": "icons/border-48.png"
-    },
-    "content_scripts": [
-        {
-            "matches": [
-                "*://*.youtube.com/*"
-            ],
-            "js": [
-                "youtube.js"
-            ]
-        }
-    ],
+    "description": "Logs a message to the console when a georestricted video is visited on YouTube.",
     "permissions": [
-        "tabs",
-        "https://www.googleapis.com/*"
-    ]
+        "activeTab",
+        "<all_urls>"
+    ],
+    "content_scripts": [{
+        "matches": [
+            "https://www.youtube.com/watch*",
+            "https://www.youtube.com/embed/*"
+        ],
+        "js": [
+            "contentScript.js"
+        ]
+    }]
 }
