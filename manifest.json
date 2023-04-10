@@ -1,11 +1,16 @@
 {
     "manifest_version": 2,
-    "name": "YouTube Georestriction Logger",
+    "name": "YouTube Geoblock",
     "version": "1.0",
-    "description": "Logs a message to the console when a georestricted video is visited on YouTube.",
+    "description": "Shows where a YouTube video is restricted so you can use a VPN to avoid the restriction.",
+    "icons": {
+        "48": "icon.png",
+        "96": "icon@2x.png"
+    },
     "permissions": [
         "activeTab",
-        "<all_urls>"
+        "<all_urls>",
+        "storage"
     ],
     "content_scripts": [{
         "matches": [
@@ -15,5 +20,13 @@
         "js": [
             "contentScript.js"
         ]
-    }]
+    }],
+    "options_ui": {
+        "page": "options.html"
+    },
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "youtube-geoblock@nicu.md"
+        }
+    }
 }

@@ -1,4 +1,29 @@
-const YOUTUBE_API_KEY = 'AIzaSyC_Ms6NQD4h6EwV3RibF44774fETecNI4U';
+let youtubeapi = "";
+
+function onError(error) {
+    console.log(`Error: ${error}`);
+}
+
+function onGot(item) {
+    if (item.youtubeapi) {
+        youtubeapi = item.youtubeapi;
+
+        // wait for the video to be fully loaded
+        const intervalId = setInterval(() => {
+            if (isVideoLoaded()) {
+                clearInterval(intervalId);
+                isGeoRestricted();
+            }
+        }, 100);
+
+
+    }
+}
+
+
+const getting = browser.storage.sync.get("youtubeapi");
+getting.then(onGot, onError);
+
 
 function getVideoId(url) {
     const urlObject = new URL(url);
@@ -23,12 +48,13 @@ function isVideoLoaded() {
 }
 
 
+
 // this function checks if the video is georestricted
 function isGeoRestricted() {
     const videoMessage = document.querySelector('#reason');
     if (videoMessage && videoMessage.textContent === 'Video unavailable') {
         const videoId = getVideoId(window.location.href);
-        const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoId}&key=${YOUTUBE_API_KEY}`;
+        const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoId}&key=${youtubeapi}`;
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
