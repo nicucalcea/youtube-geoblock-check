@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "YouTube Geoblock",
+    "name": "YouTube Geoblock Check",
     "version": "1.0",
-    "description": "Shows where a YouTube video is restricted so you can use a VPN to avoid the restriction.",
+    "description": "Is a YouTube video blocked in your country? This Firefox extension will tell you where it is blocked, so you can use a VPN to avoid the restriction..",
     "icons": {
         "48": "icon.png",
         "96": "icon@2x.png"
