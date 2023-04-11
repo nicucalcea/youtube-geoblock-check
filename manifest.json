@@ -18,7 +18,8 @@
             "https://www.youtube.com/embed/*"
         ],
         "js": [
-            "contentScript.js"
+            "contentScript.js",
+            "lib/d3.v6.min.js"
         ]
     }],
     "options_ui": {
