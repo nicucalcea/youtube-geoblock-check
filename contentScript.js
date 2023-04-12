@@ -47,6 +47,16 @@ function insertMap(countries) {
                 .join("path")
                 .attr("d", d3.geoPath().projection(projection))
                 .attr("fill", d => countries.includes(d.properties.id) ? "#ff0000" : "#3f3f3f");
+
+            svg.append("text")
+                .attr("x", 25)
+                .attr("y", 35)
+                .attr("font-size", 20)
+                .attr("fill", "white")
+                .attr("paint-order", "stroke")
+                .attr("stroke", "black")
+                .attr("stroke-width", "5px")
+                .text("This video is restricted in the countries highlighted in red.");
         })
         .catch(error => {
             console.error('Error loading countries.geojson:', error);
