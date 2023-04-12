@@ -11,6 +11,8 @@ At this stage, you'll need a YouTube Data API key. Go to [Google's developer por
 
 Once you've got a key, paste it into the add-on settings and click save.
 
+![screenshot of the settings page](screenshots/screenshot-options.png "screenshot of settings")
+
 That's it!
 
-![screenshot of the extension](screenshot.png "screenshot")
+![screenshot of the extension](screenshots/screenshot.png "screenshot")
