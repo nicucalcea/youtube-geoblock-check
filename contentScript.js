@@ -35,8 +35,7 @@ function insertMap(countries) {
     const projection = d3.geoMercator()
         .translate([width / 2, height / 1.5]);
 
-    console.log('GEO: Set the projection')
-        // get the URL of the countries.geojson file
+    // get the URL of the countries.geojson file
     const url = browser.runtime.getURL('data/countries.geojson');
 
     // load the geojson file using D3.json()
@@ -72,8 +71,9 @@ function isGeoRestricted(youtubeapi) {
             .then(response => response.json())
             .then(data => {
                 const blockedCountries = data.items[0].contentDetails.regionRestriction.blocked;
-                // videoMessage.textContent = `This video is blocked in ${blockedCountries.join(", ")}.`;
-                document.querySelector('yt-player-error-message-renderer').innerHTML = '<svg id="svg-map"></svg>';
+                const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                svg.setAttribute("id", "svg-map");
+                document.querySelector('yt-player-error-message-renderer').replaceChildren(svg);
                 insertMap(blockedCountries);
             })
             .catch(error => console.warn('GEO: Error:', error));
