@@ -13,4 +13,4 @@ Once you've got a key, paste it into the add-on settings and click save.
 
 That's it!
 
-[screenshot of the extension](screenshot.png)
+![screenshot of the extension](screenshot.png "screenshot")
