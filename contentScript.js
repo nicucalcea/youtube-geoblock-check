@@ -16,14 +16,7 @@ function isVideoLoaded() {
     );
 }
 
-function loadD3() {
-    const script = document.createElement("script");
-    script.src = browser.runtime.getURL("lib/d3.v6.min.js");
-    document.head.appendChild(script);
-}
-
 function insertMap(countries) {
-    loadD3();
 
     const width = 975;
     const height = width * 9 / 16;
@@ -63,8 +56,8 @@ function insertMap(countries) {
 }
 
 function isGeoRestricted(youtubeapi) {
-    const videoMessage = document.querySelector('#reason');
-    if (videoMessage && videoMessage.textContent === 'Video unavailable') {
+    const subreason = document.querySelector('#subreason');
+    if (subreason && subreason.textContent.trim() === 'The uploader has not made this video available in your country') {
         const videoId = getVideoId(window.location.href);
         const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoId}&key=${youtubeapi}`;
         fetch(apiUrl)
@@ -73,8 +66,12 @@ function isGeoRestricted(youtubeapi) {
                 const blockedCountries = data.items[0].contentDetails.regionRestriction.blocked;
                 const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                 svg.setAttribute("id", "svg-map");
-                document.querySelector('yt-player-error-message-renderer').replaceChildren(svg);
-                insertMap(blockedCountries);
+                // Replace the content of the error container with the map
+                const container = document.querySelector('#player-error-message-container');
+                if (container) {
+                    container.replaceChildren(svg);
+                    insertMap(blockedCountries);
+                }
             })
             .catch(error => console.warn('GEO: Error:', error));
     }
